@@ -1,3 +1,4 @@
 class Whiskey < ApplicationRecord
-  belongs_to :user
+  has_many :users_to_whiskeys
+  has_many :users, through: :users_to_whiskeys
 end

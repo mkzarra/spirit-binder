@@ -2,5 +2,6 @@
 
 class User < ApplicationRecord
   include Authentication
-  has_many :whiskeys
+  has_many :users_to_whiskeys
+  has_many :whiskeys, through: :users_to_whiskeys
 end
