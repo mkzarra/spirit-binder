@@ -6,7 +6,7 @@ class UsersController < ProtectedController
 
   # POST '/sign-up'
   def signup
-    user = User.create!(user_creds)
+    user = User.create(user_creds)
     if user.valid?
       render json: user, status: :created
     else
