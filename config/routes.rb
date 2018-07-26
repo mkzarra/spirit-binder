@@ -2,7 +2,6 @@
 
 Rails.application.routes.draw do
   resources :whiskeys
-  resources :whiskeys, only: %i[index show create]
   # RESTful routes
   resources :examples, except: %i[new edit]
   resources :users, only: %i[index show update]

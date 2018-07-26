@@ -3,13 +3,20 @@ class WhiskeysController < ApplicationController
 
   # GET /whiskeys
   def index
-    @whiskeys = Whiskey.all
+    if params.key?('name')
+      @whiskeys = Whiskey.all.select do |whiskey|
+          whiskey.name.downcase.include? params['name'].downcase
+      end 
+      render json: @whiskeys
+    else
 
-    render json: @whiskeys
+      render json: Whiskey.all
+    end
   end
 
   # GET /whiskeys/1
   def show
+    @whiskey = Whiskey.find_by(params[:id])
     render json: @whiskey
   end
 
