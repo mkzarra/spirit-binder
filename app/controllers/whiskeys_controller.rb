@@ -22,7 +22,7 @@ class WhiskeysController < ApplicationController
 
   # POST /whiskeys
   def create
-    @whiskey = Whiskey.new(whiskey_params)
+    @whiskey = Whiskey.new(set_whiskey, whiskey_params)
 
     if @whiskey.save
       render json: @whiskey, status: :created, location: @whiskey
