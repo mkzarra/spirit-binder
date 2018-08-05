@@ -16,14 +16,15 @@ class WhiskeysController < ApplicationController
 
   # GET /whiskeys/1
   def show
-    @whiskey = Whiskey.find_by(params[:id])
+    @whiskey = Whiskey.find(params[:id])
     render json: @whiskey
   end
 
   # POST /whiskeys
   def create
-    @whiskey = Whiskey.new(set_whiskey, whiskey_params)
-
+    whiskey_params
+    params.permit!
+    @whiskey = Whiskey.new(params[:whiskeys])
     if @whiskey.save
       render json: @whiskey, status: :created, location: @whiskey
     else
@@ -53,6 +54,6 @@ class WhiskeysController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def whiskey_params
-      params.require(:whiskey).permit(:name, :region, :age, :price, :classification, :description)
+      params.require(:whiskeys).permit(:name, :region, :age, :price, :classification, :description)
     end
 end
