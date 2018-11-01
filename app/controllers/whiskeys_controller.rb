@@ -5,7 +5,8 @@ class WhiskeysController < ApplicationController
   def index
     if params.key?('name')
       @whiskeys = Whiskey.all.select do |whiskey|
-          whiskey.name.downcase.include? params['name'].downcase
+        next if whiskey.name.nil?
+          whiskey.name.downcase.include?(params['name'].downcase)
       end 
       render json: @whiskeys
     else
@@ -22,8 +23,6 @@ class WhiskeysController < ApplicationController
 
   # POST /whiskeys
   def create
-    whiskey_params
-    params.permit!
     @whiskey = Whiskey.new(params[:whiskeys])
     if @whiskey.save
       render json: @whiskey, status: :created, location: @whiskey
@@ -47,13 +46,13 @@ class WhiskeysController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_whiskey
-      @whiskey = Whiskey.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_whiskey
+    @whiskey = Whiskey.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def whiskey_params
-      params.require(:whiskeys).permit(:name, :region, :age, :price, :classification, :description)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def whiskey_params
+    params.require(:whiskey).permit(:name, :region, :age, :price, :classification, :description)
+  end
 end
