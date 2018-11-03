@@ -23,12 +23,13 @@ class WhiskeysController < ApplicationController
 
   # POST /whiskeys
   def create
-    @whiskey = Whiskey.new(params[:whiskeys])
+    @whiskey = Whiskey.new(whiskey_params)
     if @whiskey.save
       render json: @whiskey, status: :created, location: @whiskey
     else
       render json: @whiskey.errors, status: :unprocessable_entity
     end
+    binding.pry
   end
 
   # PATCH/PUT /whiskeys/1

@@ -1,4 +1,4 @@
 class Whiskey < ApplicationRecord
-  has_many :users_to_whiskeys
-  has_many :users, through: :users_to_whiskeys
+  has_many :favorites
+  has_many :users, through: :favorites
 end
