@@ -29,7 +29,6 @@ class WhiskeysController < ApplicationController
     else
       render json: @whiskey.errors, status: :unprocessable_entity
     end
-    binding.pry
   end
 
   # PATCH/PUT /whiskeys/1
